@@ -19,6 +19,10 @@ export default function App() {
     setEnteredGoalText('');
   }
 
+  const deleteGoalHandler = () => {
+    console.log('HERE')
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -27,7 +31,8 @@ export default function App() {
           alwaysBounceVertical={false} 
           data={courseGoals} 
           keyExtractor={(item, index) => item.id}
-          renderItem={(itemData) => <GoalItem text={itemData.item.text} /> }/>
+          renderItem={(itemData) => <GoalItem text={itemData.item.text} /> }
+          onDeleteItem={deleteGoalHandler}/>
         
       </View>
     </View>
