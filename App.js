@@ -16,11 +16,17 @@ export default function App() {
   const addGoalHandler = (enteredGoalText) => {
     console.log('Add goal!', enteredGoalText);
     setCourseGoals((currentGoals) => [...currentGoals, { text: enteredGoalText, id: Math.random().toString() }]);
-    setEnteredGoalText('');
   }
 
-  const deleteGoalHandler = () => {
-    console.log('HERE')
+  const deleteGoalHandler = (id) => {
+    console.log(id);
+    setCourseGoals(currentCourseGoals => {
+      console.log(currentCourseGoals.filter(goal => {
+        console.log(goal.id, id);
+        return goal.id !== id;
+      }))
+      return currentCourseGoals.filter(goal => goal.id !== id);
+    })
   }
 
   return (
@@ -31,8 +37,8 @@ export default function App() {
           alwaysBounceVertical={false} 
           data={courseGoals} 
           keyExtractor={(item, index) => item.id}
-          renderItem={(itemData) => <GoalItem text={itemData.item.text} /> }
-          onDeleteItem={deleteGoalHandler}/>
+          renderItem={(itemData) => <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler} /> }
+          />
         
       </View>
     </View>
