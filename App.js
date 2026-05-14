@@ -5,6 +5,8 @@ import {
   FlatList,
   Button
 } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
 import { GoalItem } from './components/GoalItem';
 import { GoalInput } from './components/GoalInput';
 
@@ -38,29 +40,34 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title='Add New Goal' color="#5E7AC4" onPress={startAddGoalHandler} />
-      
-      <GoalInput onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} visible={modalIsVisible}/>
-      
-      <View style={styles.goalsContainer}> 
-        <FlatList 
-          alwaysBounceVertical={false} 
-          data={courseGoals} 
-          keyExtractor={(item, index) => item.id}
-          renderItem={(itemData) => <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler} /> }
-          />
+    <>
+      <StatusBar style="light" />
+    
+      <View style={styles.appContainer}>
+        <Button title='Add New Goal' color="#6f8cdb" onPress={startAddGoalHandler} />
         
+        <GoalInput onAddGoal={addGoalHandler} onCancel={endAddGoalHandler} visible={modalIsVisible}/>
+        
+        <View style={styles.goalsContainer}> 
+          <FlatList 
+            alwaysBounceVertical={false} 
+            data={courseGoals} 
+            keyExtractor={(item, index) => item.id}
+            renderItem={(itemData) => <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler} /> }
+            />
+          
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 60,
     paddingHorizontal: 16,
+    backgroundColor: '#1e085a',
   },
   goalsContainer: {
     flex: 6,
